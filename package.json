@@ -1,0 +1,21 @@
+{
+  "name": "bot-video-upload",
+  "version": "1.0.0",
+  "description": "A tool to easily upload videos from pandavideo to adilo",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "start": "node build/index.js",
+    "single": "node build/single.js"
+  },
+  "author": "Victor Gomes Nogueira",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "typescript": "^5.3.3"
+  }
+}
