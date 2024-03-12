@@ -23,3 +23,22 @@ export type Video = {
 export interface VideoResponse{
     videos: Video[]
 }
+
+export class VideoQueue{
+
+    static queue: Video[]
+    constructor(private first: Video){
+
+        this.first = first
+    }
+
+    static unQueue(){
+
+        return this.queue.shift()
+    }
+    
+    static inQueue(list: Video[]){
+        
+        this.queue = [...list]
+    }
+}
