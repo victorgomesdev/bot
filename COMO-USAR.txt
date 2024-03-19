@@ -1,0 +1,7 @@
+1 - ABRA O PANDAVIDEO NA PASTA DESEJADA PARA BAIXAR OS VÍDEOS
+2 - ABRA O ARQUIVO env.json
+3 - COPIE E COLE O ID DA PASTA NA POSIÇÃO SOURCE_FOLDER (caso seja um vídeo único cole o id dele na posição SINGLE_VIDEO)
+4 - SALVE O ARQUIVO
+5 - ABRA O CMD NA RAIZ DA PASTA DO BOT
+6 - INSIRA O COMANDO npm run start (caso for um único vídeo o comando é npm run single)
+7 - OS VÍDEOS BAIXADOS ESTARÃO EM 'build/temp/'
