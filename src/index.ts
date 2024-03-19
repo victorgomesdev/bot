@@ -16,7 +16,7 @@ listVideos(env.SOURCE_FOLDER)
 
         listaVideos.forEach((video) => {
 
-            let temp = fs.createWriteStream(__dirname + `/temp/${video.title.replace('?','')}.mp4`)
+            let temp = fs.createWriteStream(__dirname + `/temp/${video.title.replaceAll('[\\/:"*?<>|]/g', '')}.mp4`)
 
             console.log(`DOWNLOADING: ${video.title}...`)
             downloadVideoFromPanda(video.id)
