@@ -8,23 +8,47 @@ let listaVideos: Video[] = []
 
 listVideos(env.SOURCE_FOLDER)
     .then(res => {
+        
         listaVideos.push(...res)
+        let current = listaVideos.shift()
 
+        while(current != undefined){
 
+            let temp = fs.createWriteStream(__dirname + `/temp/${current.title.replaceAll('[\\/:"*?<>|]/g', '')}.mp4`)
+
+            console.log(`BAIXANDO VÍDEO ${current.title}`)
+
+            downloadVideoFromPanda(current.id)
+            .then((content)=>{
+
+                content.on('data', (chunk: Buffer)=>{
+
+                    temp.write(chunk)
+                })
+
+                content.on('end', ()=>{
+                    console.log(`O VÍDEO ${current?.title} FOI BAIXADO`)
+                })
+            })
+
+            current = listaVideos.shift()
+
+        }
     })
-    .then(() => {
+    // .then(() => {
 
-        listaVideos.forEach((video) => {
+        
+    //     listaVideos.forEach((video) => {
 
-            let temp = fs.createWriteStream(__dirname + `/temp/${video.title.replaceAll('[\\/:"*?<>|]/g', '')}.mp4`)
+    //         let temp = fs.createWriteStream(__dirname + `/temp/${video.title.replaceAll('[\\/:"*?<>|]/g', '')}.mp4`)
 
-            console.log(`DOWNLOADING: ${video.title}...`)
-            downloadVideoFromPanda(video.id)
-                .then(content => {
+    //         console.log(`DOWNLOADING: ${video.title}...`)
+    //         downloadVideoFromPanda(video.id)
+    //             .then(content => {
 
-                    content.on('data', (chunk: Buffer) => temp.write(chunk))
-                    content.on('end', () => {
-                        console.log(`FILE: ${video.title} HAS BEEN DOWNLOADED`)
+    //                 content.on('data', (chunk: Buffer) => temp.write(chunk))
+    //                 content.on('end', () => {
+    //                     console.log(`FILE: ${video.title} HAS BEEN DOWNLOADED`)
 
                         // getInitUpload(video).then((res: FileUploadResponse) => {
 
@@ -53,8 +77,8 @@ listVideos(env.SOURCE_FOLDER)
                         //         })
                         //     })
                         // })
-                    })
+    //                 })
 
-                })
-        })
-    })
+    //             })
+    //     })
+    // })
